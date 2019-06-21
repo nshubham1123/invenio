@@ -1,0 +1,2320 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="project1.project1" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:t="sap.tnt"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:u="sap.ui.unified" xmlns:tab="sap.ui.table">
+
+	<Page id="pglogin" title="Login">
+
+		<Image src="img/invenio.png" width="100%" height="30%">
+
+		</Image>
+		<content>
+			<f:Form>
+				<f:layout>
+					<f:ResponsiveGridLayout columns="L1 M1 S1"
+						columnsL="1" columnsM="1" columnsS="1">
+					</f:ResponsiveGridLayout>
+				</f:layout>
+
+				<f:FormContainer id="fcont">
+					<f:formElements>
+						<f:FormElement>
+							<f:fields>
+								<Label id="lEmailid" text="Email ID" required="true"
+									class="sapUiSmallMarginTop">
+									<layoutData>
+										<l:GridData span="L1 M4 S6" indent="L8 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Label>
+								<Input id="inEmailid" placeholder="Please enter your email id"
+									maxLength="35" liveChange="fnEmailid" type="Email">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+								<Label id="lPassword" text="Password" required="true"
+									class="sapUiSmallMarginTop">
+									<layoutData>
+										<l:GridData span="L1 M4 S6" indent="L8 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Label>
+								<Input id="inPassword" placeholder="Please enter your password"
+									maxLength="15" liveChange="fnPassword" type="Password">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+								<Button id="btlogin" text="Login" press="fnlogin" type="Emphasized">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L8 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Button>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:Form>
+		</content>
+
+		<Image src="img/sap.png" width="30%" height="30%">
+
+		</Image>
+	</Page>
+
+	<Page id="pgwel" title="Welcome">
+		<Toolbar>
+			<ToolbarSpacer />
+			<Text id="tname" text=""></Text>
+			<core:Icon src="sap-icon://log" press="fnlogout" color="midnightblue"></core:Icon>
+		</Toolbar>
+		<TileContainer>
+			<StandardTile title="Personal Data Information" press="fnprsnlinfo"></StandardTile>
+			<StandardTile title="Timesheet Entry" press="fntsentry"></StandardTile>
+			<StandardTile id="stempdetails" title="Employee Details" press="fnempdetails" visible="false"></StandardTile>
+		</TileContainer>
+
+	</Page>
+
+	<Page id="pgtsentry" title="Timesheet Entry" showNavButton="true"
+		navButtonPress="fnnavpgwel">
+		<SplitContainer id="sconts" mode="HideMode"
+			afterMasterOpen="fnmasteropen">
+
+			<masterPages>
+				<Page title="Entity">
+					<headerContent>
+						<Button icon="sap-icon://menu2" press="fnmasterclose" />
+					</headerContent>
+					<u:Calendar id="cal" select="fncal"></u:Calendar>
+					<Select id="seproject" visible="false" change="fnproject"
+						items="{/project}" width="100%">
+						<core:Item key="{Key}" text="{Text}"></core:Item>
+
+					</Select>
+					<Select id="seobject" visible="false" change="fnobject"
+						items="{/object}" width="100%">
+						<core:Item key="{Key}" text="{Text}"></core:Item>
+
+					</Select>
+					<Select id="seactivity" visible="false" change="fnactivity"
+						items="{/activity}" width="100%">
+						<core:Item key="{Key}" text="{Text}"></core:Item>
+
+					</Select>
+					<Input id="inactvdesc" visible="false" placeholder="Activity Description">
+					</Input>
+
+					<Input id="incallno" visible="false" placeholder="call number"
+						width="50%">
+					</Input>
+
+					<Select id="secountryt" visible="false" change="fncountryt"
+						items="{/country}" width="50%">
+						<core:Item key="{Key}" text="{Text}"></core:Item>
+					</Select>
+
+					<Button id="btnsubmit" visible="false" type="Emphasized"
+						text="Submit" press="fnsubmit"></Button>
+
+
+
+				</Page>
+			</masterPages>
+			<detailPages>
+				<Page title="Details">
+					<Table id="tab1" mode="SingleSelect" items="{/entry}">
+						<columns>
+							<Column>
+								<ObjectIdentifier title="Date/" text="Location" />
+
+							</Column>
+
+							<Column>
+								<ObjectIdentifier title="Project/" text="Country" />
+							</Column>
+
+							<Column>
+								<ObjectIdentifier title="Object/" text="CR" />
+							</Column>
+
+							<Column>
+								<ObjectIdentifier title="Activity/" text="Time" />
+							</Column>
+
+							<Column>
+								<ObjectIdentifier title="Activity Desc" />
+							</Column>
+						</columns>
+
+						<ColumnListItem id="cli1">
+							<cells>
+								<ObjectIdentifier title="{Date}" text="{Location}" />
+
+								<ObjectIdentifier title="{Project}" text="{Country}" />
+
+								<ObjectIdentifier title="{Object}" text="{CR}" />
+
+								<ObjectIdentifier title="{Activity}" text="{Time}" />
+
+								<ObjectIdentifier title="{Activity_Desc}" />
+							</cells>
+						</ColumnListItem>
+
+					</Table>
+
+					<footer>
+						<Toolbar>
+							<ToolbarSpacer />
+							<Button id="btncopy" text="Copy" press="fnbtncopy" type="Emphasized"
+								icon="sap-icon://copy"></Button>
+							<Button id="btndel" text="Delete" press="fnbtndel" type="Reject"
+								icon="sap-icon://delete"></Button>
+							<Button id="btnsave" text="Save" press="fnbtnsave" type="Emphasized"
+								icon="sap-icon://save"></Button>
+						</Toolbar>
+					</footer>
+				</Page>
+			</detailPages>
+		</SplitContainer>
+	</Page>
+
+	<Page id="pgprsnlinfo" title="Personal Information" showNavButton="true"
+		navButtonPress="fnnavpgwel">
+		<IconTabBar background-color="yellow">
+			<items>
+				<IconTabFilter text="Employee Personal Details">
+					<content>
+						<f:Form>
+							<f:layout>
+								<f:ResponsiveGridLayout columns="L1 M1 S1"
+									columnsL="1" columnsM="1" columnsS="1">
+								</f:ResponsiveGridLayout>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:fields>
+												<Text text="Personal Data" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Text text="Organizational Assignment" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L3 M6 S9"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Label id="lempid" text="Emp ID" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inempid" placeholder="Please enter your employee ID"
+													liveChange="fnempid">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lgrade" text="Grade" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="ingrade" liveChange="fngrade">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lfname" text="First Name" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="infname" placeholder="Please enter your first name"
+													liveChange="fnfname">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="ldesg" text="Designation" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="indesg" liveChange="fndesg">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="llname" text="Last Name" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inlname" placeholder="Please enter your last name"
+													liveChange="fnlname">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lbsloc" text="Base Location" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inbsloc" liveChange="fnbsloc">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lgender" text="Gender" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<RadioButton id="rbmale" text="Male" select="fngender">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</RadioButton>
+												<RadioButton id="rbfemale" text="Female" select="fngender">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</RadioButton>
+
+												<Label id="lcmpt" text="Competency" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="incmpt" liveChange="fncmpt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lbtdate" text="Birth Date" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<DatePicker id="dpbtdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnbtdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+												<Label id="lrptng" text="Reporting Manager" class="sapUiSmallMarginTop"
+													textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inrptng" liveChange="fnrptng">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lhrdate" text="Hire Date" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<DatePicker id="dphrdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnhrdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+
+												<Label id="lpmng1" text="Project Manager1" class="sapUiSmallMarginTop"
+													textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpmng1" liveChange="fnpmng1">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lmrgdate" text="Marriage Date" class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+
+
+												<DatePicker id="dpmrgdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnmrgdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+
+												<Label id="lpmng2" text="Project Manager2" class="sapUiSmallMarginTop"
+													textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M4 S6"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpmng2" liveChange="fnpmng2">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</content>
+				</IconTabFilter>
+
+				<IconTabFilter text="Addresses">
+					<content>
+						<f:Form>
+							<f:layout>
+								<f:ResponsiveGridLayout columns="L1 M1 S1"
+									columnsL="1" columnsM="1" columnsS="1">
+								</f:ResponsiveGridLayout>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:fields>
+												<Text text="Current Address" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Text text="Permanent Address" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L3 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Label id="ladd1c" text="Address Line 1" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inadd1c" liveChange="fnadd1">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<CheckBox id="addckbox" select="fnckbox">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</CheckBox>
+												<Text text="Permanent Address is same as Current Address"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L3 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Label id="ladd2c" text="Address line 2" class="sapUiSmallMarginTop"
+													textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inadd2c" liveChange="fnadd2">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="ladd1p" text="Address Line 1" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inadd1p" liveChange="fnadd1">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lcityc" text="City" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="incityc" liveChange="fncityc">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="ladd2p" text="Address line 2" class="sapUiSmallMarginTop"
+													textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inadd2p" liveChange="fnadd2">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lpostalc" text="Postal Code" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpostalc" liveChange="fnpostalc">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lcityp" text="City" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="incityp" liveChange="fncityp">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lregionc" text="Region/State" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Select id="seregionc" change="fnregionc" items="{/region}">
+													<core:Item key="{Key}" text="{Text}"></core:Item>
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Select>
+												<Label id="lpostalp" text="Postal Code" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpostalp" liveChange="fnpostalp">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lcountryc" text="Country" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Select id="secountryc" change="fncountryc" items="{/country}">
+													<core:Item key="{Key}" text="{Text}"></core:Item>
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Select>
+
+												<Label id="lregionp" text="Region/State" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Select id="seregionp" change="fnregionp" items="{/region}">
+													<core:Item key="{Key}" text="{Text}"></core:Item>
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Select>
+												<Label id="lemgprsn" text="Emergency Contact Person"
+													required="true" class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inemgprsn" liveChange="fnemgprsn">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lcountryp" text="Country" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Select id="secountryp" change="fncountryp" items="{/country}">
+													<core:Item key="{Key}" text="{Text}"></core:Item>
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Select>
+												<Label id="lemgno" text="Emergency Contact Number"
+													required="true" class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inemgno" liveChange="fnemgno">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</content>
+				</IconTabFilter>
+
+				<IconTabFilter text="Family Details">
+					<content>
+						<f:Form>
+							<f:layout>
+								<f:ResponsiveGridLayout columns="L1 M1 S1"
+									columnsL="1" columnsM="1" columnsS="1">
+								</f:ResponsiveGridLayout>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:fields>
+												<Text text="Father" class="txt">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Text text="Mother" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L4 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+
+												<Label id="lftfname" text="First Name" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inftfname" liveChange="fnftfname">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lmtfname" text="First Name" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inmtfname" liveChange="fnmtfname">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lftlname" text="Last Name" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inftlname" liveChange="fnftlname">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lmtlname" text="Last Name" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inmtlname" liveChange="fnmtlname">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+												<Label id="lftbtdate" text="Father's Birth Date"
+													required="true" class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<DatePicker id="dpftbtdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnbtdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+
+												<Label id="lmtbtdate" text="Mother's Birth Date"
+													required="true" class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<DatePicker id="dpmtbtdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnbtdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</content>
+				</IconTabFilter>
+
+				<IconTabFilter text="Communication">
+					<content>
+						<f:Form>
+							<f:layout>
+								<f:ResponsiveGridLayout columns="L1 M1 S1"
+									columnsL="1" columnsM="1" columnsS="1">
+								</f:ResponsiveGridLayout>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:fields>
+												<Text text="Communications" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+
+
+												<Label id="liemailid" text="Invenio email ID"
+													required="true" class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="iniemailid" liveChange="fniemailid">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+												<Label id="lpemailid" text="Personal email ID"
+													required="true" class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpemailid" liveChange="fnpemailid">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+												<Label id="lmob" text="Mobile" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inmob" liveChange="fnmob">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="laltmob" text="Alternate No" class="sapUiSmallMarginTop"
+													textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inaltmob" liveChange="fnmob">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</content>
+				</IconTabFilter>
+
+				<IconTabFilter text="Bank Details">
+
+					<content>
+						<f:Form>
+							<f:layout>
+								<f:ResponsiveGridLayout columns="L1 M1 S1"
+									columnsL="1" columnsM="1" columnsS="1">
+								</f:ResponsiveGridLayout>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:fields>
+												<Text text="Bank Details" class="txt">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+
+
+												<Label id="lbank" text="Bank Name" required="true"
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inbank" liveChange="fnbank">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+												<Label id="lbranch" text="Branch" required="true"
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inbranch" liveChange="fnbranch">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+												<Label id="lacno" text="A/C Number" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inacno" liveChange="fnacno">
+													<layoutData>
+														<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</content>
+				</IconTabFilter>
+
+				<IconTabFilter text="Identification">
+					<content>
+						<f:Form>
+							<f:layout>
+								<f:ResponsiveGridLayout columns="L1 M1 S1"
+									columnsL="1" columnsM="1" columnsS="1">
+								</f:ResponsiveGridLayout>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:fields>
+												<Text text="Passport Details" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Text text="Other details" class="txt">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L3 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Text>
+												<Label id="lpsno" text="Passport Number" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpsno" liveChange="fnpsno">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+												<Label id="lbdgrp" text="Blood Group" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Select id="sebdgrp1" change="fnbdgrp1" items="{/blood_group1}">
+													<core:Item key="{Key}" text="{Text}"></core:Item>
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Select>
+												<Select id="sebdgrp2" change="fnbdgrp2" items="{/blood_group2}">
+													<core:Item key="{Key}" text="{Text}"></core:Item>
+													<layoutData>
+														<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Select>
+												<Label id="lisplace" text="Place of Issue" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inisplace" liveChange="fnisplace">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="ladhar" text="Aadhar Card" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inadhar" liveChange="fnadhar">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+
+
+												<Label id="lisdate" text="Issue Date" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<DatePicker id="dpisdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnisdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+
+
+												<Label id="lpanno" text="PAN No" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpanno" liveChange="fnpanno">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+												<Label id="lexdate" text="Expiry Date" required="true"
+													class="sapUiSmallMarginTop">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="true" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<DatePicker id="dpexdate" displayFormat="dd/MM/yyyy"
+													valueformat="yyyyMMdd" change="fnexdate">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="true" linebreakS="true">
+														</l:GridData>
+													</layoutData>
+												</DatePicker>
+
+												<Label id="lpfno" text="PF No" required="true"
+
+													class="sapUiSmallMarginTop" textalign="center">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Label>
+												<Input id="inpfno" liveChange="fnpfno">
+													<layoutData>
+														<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+															linebreakL="false" linebreakM="false" linebreakS="false">
+														</l:GridData>
+													</layoutData>
+												</Input>
+
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</content>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+	</Page>
+
+    <Page id="pgempdata" title="Employee Details" showNavButton="true"
+		navButtonPress="fnnavpgwel" >
+		<SplitContainer id="sconemp" mode="HideMode" afterMasterOpen="fnmasteropenemp">
+			<masterPages>
+				<Page id="pgmng" title="Managers">
+					<content>
+						<List itemPress="fndisplayemp">
+							<items>
+								<DisplayListItem label="Manager1" value="101"
+									type="Navigation" custom:value="101" press="fnnavpgemp1"></DisplayListItem>
+								<DisplayListItem label="Manager2" value="102"
+									type="Navigation" custom:value="102" press="fnnavpgemp2"></DisplayListItem>
+								<DisplayListItem label="Manager3" value="103"
+									type="Navigation" custom:value="103" press="fnnavpgemp3"></DisplayListItem>
+							</items>
+						</List>
+					</content>
+				</Page>
+
+				<Page id="pgemp1" title="Employees under Manager1"
+					showNavButton="true" navButtonPress="fnnavpgmng">
+					<content>
+						<List itemPress="fndisplayemp">
+							<items>
+								<DisplayListItem label="Employee1" value="201"
+									type="Active" custom:value="201"></DisplayListItem>
+								<DisplayListItem label="Employee2" value="202"
+									type="Active" custom:value="202"></DisplayListItem>
+								<DisplayListItem label="Employee3" value="203"
+								type="Active" custom:value="203"></DisplayListItem>
+							</items>
+						</List>
+					</content>
+				</Page>
+
+				<Page id="pgemp2" title="Employees under Manager2"
+					showNavButton="true" navButtonPress="fnnavpgmng">
+					<content>
+						<List itemPress="fndisplayemp">
+							<items>
+								<DisplayListItem label="Employee4" value="204"
+									type="Active" custom:value="201"></DisplayListItem>
+								<DisplayListItem label="Employee5" value="205"
+									type="Active" custom:value="205"></DisplayListItem>
+								<DisplayListItem label="Employee6" value="206"
+									type="Active" custom:value="206"></DisplayListItem>
+							</items>
+						</List>
+					</content>
+				</Page>
+
+				<Page id="pgemp3" title="Employees under Employee3"
+					showNavButton="true" navButtonPress="fnnavpgmng">
+					<content>
+						<List itemPress="fndisplayemp">
+							<items>
+								<DisplayListItem label="Employee7" value="207"
+									type="Active" custom:value="207"></DisplayListItem>
+								<DisplayListItem label="Employee8" value="208"
+									type="Active" custom:value="208"></DisplayListItem>
+								<DisplayListItem label="Employee9" value="209"
+									type="Active" custom:value="209"></DisplayListItem>
+							</items>
+						</List>
+					</content>
+				</Page>
+
+			</masterPages>
+
+			<detailPages>
+				<Page id="pgempinfo" title="Employee Personal Details" items="{/employee}">
+					<IconTabBar background-color="yellow">
+						<items>
+							<IconTabFilter text="Employee Personal Details">
+								<content>
+									<f:Form>
+										<f:layout>
+											<f:ResponsiveGridLayout columns="L1 M1 S1"
+												columnsL="1" columnsM="1" columnsS="1">
+											</f:ResponsiveGridLayout>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer>
+												<f:formElements>
+													<f:FormElement>
+														<f:fields>
+
+															<Text text="Personal Data" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S2"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Text text="Organizational Assignment" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L3 M2 S3"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label text="Emp ID" 
+																textalign="center" class="label">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/empid}">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Grade" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/grade}">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="First Name" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/fname}">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Designation" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/desg}">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Last Name" >
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/lname}">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Base Location" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/baseloc}" liveChange="fnbsloc">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Gender"  >
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/gender}" liveChange="fnbsloc">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Competency" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/competency}" liveChange="fncmpt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Birth Date" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/birth}" liveChange="fncmpt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Reporting Manager" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/rptng}" liveChange="fnrptng">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Hire Date" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/hire}" liveChange="fncmpt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Project Manager1" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/projectmng1}" liveChange="fnpmng1">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Marriage Date" >
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/marriage}" liveChange="fnpmng1">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+
+															<Label class="label"  text="Project Manager2" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M1 S6"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/projectmng2}" liveChange="fnpmng2">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+														</f:fields>
+													</f:FormElement>
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</content>
+							</IconTabFilter>
+
+							<IconTabFilter text="Addresses">
+								<content>
+									<f:Form>
+										<f:layout>
+											<f:ResponsiveGridLayout columns="L1 M1 S1"
+												columnsL="1" columnsM="1" columnsS="1">
+											</f:ResponsiveGridLayout>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer>
+												<f:formElements>
+													<f:FormElement>
+														<f:fields>
+															<Text text="Current Address" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M1 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Text text="Permanent Address" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L3 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Address Line 1" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/add1c}" liveChange="fnadd1">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															<Label class="label"  text="Address Line 1" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/add1p}" liveChange="fnadd1">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Address line 2" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/add2c}" liveChange="fnadd2">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Address line 2" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/add2p}" liveChange="fnadd2">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="City"  >
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/cityc}" liveChange="fncityc">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															
+															<Label class="label"  text="City"  >
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/cityp}" liveChange="fncityp">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															<Label class="label"  text="Postal Code" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/postalc}" liveChange="fnpostalc">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															<Label class="label"  text="Postal Code" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/postalp}" liveChange="fnpostalp">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Region/State" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/regionc}" liveChange="fnemgno">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															<Label class="label"  text="Region/State" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/regionp}" liveChange="fnemgno">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Country" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/countryc}" liveChange="fnemgno">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Country" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/countryp}" liveChange="fnemgno">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															<Label class="label"  text="Emergency Contact Person" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/emgprsn}" liveChange="fnemgprsn">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															
+															<Label class="label"  text="Emergency Contact Number" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/emgno}" liveChange="fnemgno">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+														</f:fields>
+													</f:FormElement>
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</content>
+							</IconTabFilter>
+
+							<IconTabFilter text="Family Details">
+								<content>
+									<f:Form>
+										<f:layout>
+											<f:ResponsiveGridLayout columns="L1 M1 S1"
+												columnsL="1" columnsM="1" columnsS="1">
+											</f:ResponsiveGridLayout>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer>
+												<f:formElements>
+													<f:FormElement>
+														<f:fields>
+															<Text text="Father" class="txt">
+																<layoutData>
+																	<l:GridData span="L1 M2 S6" indent="L2 M1 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Text text="Mother" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L4 M4 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="First Name" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/ftfname}" liveChange="fnftfname">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="First Name" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/mtfname}" liveChange="fnmtfname">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Last Name" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/ftlname}" liveChange="fnftlname">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Last Name" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/mtlname}" liveChange="fnmtlname">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Father's Birth Date" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/fbirth}" liveChange="fnmtlname">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Mother's Birth Date" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/mbirth}" liveChange="fnmtlname">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+														</f:fields>
+													</f:FormElement>
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</content>
+							</IconTabFilter>
+
+							<IconTabFilter text="Communication">
+								<content>
+									<f:Form>
+										<f:layout>
+											<f:ResponsiveGridLayout columns="L1 M1 S1"
+												columnsL="1" columnsM="1" columnsS="1">
+											</f:ResponsiveGridLayout>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer>
+												<f:formElements>
+													<f:FormElement>
+														<f:fields>
+															<Text text="Communications" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L2 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Invenio email ID" 
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/iemail}" liveChange="fniemailid">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Personal email ID" 
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/pemail}" liveChange="fnpemailid">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Mobile"  
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/mob}" liveChange="fnmob">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Alternate No" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/altmob}" liveChange="fnmob">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+														</f:fields>
+													</f:FormElement>
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</content>
+							</IconTabFilter>
+
+							<IconTabFilter text="Bank Details">
+
+								<content>
+									<f:Form>
+										<f:layout>
+											<f:ResponsiveGridLayout columns="L1 M1 S1"
+												columnsL="1" columnsM="1" columnsS="1">
+											</f:ResponsiveGridLayout>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer>
+												<f:formElements>
+													<f:FormElement>
+														<f:fields>
+															<Text text="Bank Details" class="txt">
+																<layoutData>
+																	<l:GridData span="L1 M4 S6" indent="L2 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Bank Name" 
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/bank}" liveChange="fnbank">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="Branch"  
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/branch}" liveChange="fnbranch">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+															<Label class="label"  text="A/C Number" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L1 M4 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/acno}" liveChange="fnacno">
+																<layoutData>
+																	<l:GridData span="L4 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+														</f:fields>
+													</f:FormElement>
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</content>
+							</IconTabFilter>
+
+							<IconTabFilter text="Identification">
+								<content>
+									<f:Form>
+										<f:layout>
+											<f:ResponsiveGridLayout columns="L1 M1 S1"
+												columnsL="1" columnsM="1" columnsS="1">
+											</f:ResponsiveGridLayout>
+										</f:layout>
+										<f:formContainers>
+											<f:FormContainer>
+												<f:formElements>
+													<f:FormElement>
+														<f:fields>
+															<Text text="Passport Details" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M2 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Text text="Other details" class="txt">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L3 M3 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Passport Number" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/psno}" liveChange="fnpsno">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															<Label class="label"  text="Blood Group" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															
+															<Text text="{employee>/bgrp}" liveChange="fnpfno">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+															
+															<Label class="label"  text="Place of Issue" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/ispalce}" liveChange="fnisplace">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Aadhar Card" 
+
+																 textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/adhar}" liveChange="fnadhar">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+
+
+															<Label class="label"  text="Issue Date" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/isdate}" liveChange="fnpfno">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="PAN No" 
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/panno}" liveChange="fnpanno">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="Expiry Date" 
+																>
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L0 M0 S0"
+																		linebreakL="true" linebreakM="true" linebreakS="true">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/exdate}" liveChange="fnpfno">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+															<Label class="label"  text="PF No"  
+																textalign="center">
+																<layoutData>
+																	<l:GridData span="L2 M2 S6" indent="L2 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Label>
+															<Text text="{employee>/pfno}" liveChange="fnpfno">
+																<layoutData>
+																	<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+																		linebreakL="false" linebreakM="false" linebreakS="false">
+																	</l:GridData>
+																</layoutData>
+															</Text>
+
+														</f:fields>
+													</f:FormElement>
+												</f:formElements>
+											</f:FormContainer>
+										</f:formContainers>
+									</f:Form>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</Page>
+			</detailPages>
+		</SplitContainer>
+	</Page>
+	
+</core:View>

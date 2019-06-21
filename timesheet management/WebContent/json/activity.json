@@ -1,0 +1,17 @@
+{
+ "activity" :[
+ {
+	   "Key" : "",
+	   "Text" : ""
+	},
+	{
+	 	"Key" : "CHMG",
+		"Text" : "Change Mangement"
+		
+	},
+	{
+	   "Key" : "RSPL",
+	   "Text" : "Resource Planning"
+	}
+	]
+}

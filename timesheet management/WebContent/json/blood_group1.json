@@ -1,0 +1,24 @@
+{
+ "blood_group1" :[
+  {
+	   "Key" : "",
+	   "Text" : ""
+	},
+	{
+	 	"Key" : "O",
+		"Text" : "O"	
+	},
+	{
+	   "Key" : "A",
+	   "Text" : "A"
+	},
+	{
+	   "Key" : "B",
+	   "Text" : "B"
+	},
+	{
+	   "Key" : "AB",
+	   "Text" : "AB"
+	}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"users":[
+		{
+		"name" : "Shubham Nemani",
+		"emailid" : "shubham@gmail.com",
+		"password": "invenio",
+		"hr" : "no"
+		},
+		{
+		"name" : "Puneet Mittal",
+		"emailid" : "puneet@gmail.com",
+		"password": "invenio",
+		"hr" : "no"
+		},
+		{
+		"name" : "Gaurav Gupta",
+		"emailid" : "gaurav@gmail.com",
+		"password": "invenio",
+		"hr" : "yes"
+		}
+	]
+}
