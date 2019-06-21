@@ -1,0 +1,374 @@
+{
+"Cities": [
+
+            {
+                 "city":""
+            
+            },
+             {
+                 "city" : "Mumbai",
+                 "Theatres" : [
+                 
+                        {
+                     		"theatre":""
+                     	},
+                 	
+                     { 
+                        "theatre" : "IMAX", 
+                            
+                             "Type" : [
+                             	
+                             	  { 
+                             	    "type":""
+                             	  },
+                            	
+                                 { 
+                                 
+                                 "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"300"}
+                                 ]
+                                 
+                                 },  
+                                 {  
+                                 "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"180"}
+                                 ]
+                                 },
+                                 
+                                 { 
+                                 "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"490"}
+                                 ]
+                                 } 
+                             ]
+                        
+                     },
+                     
+                        { 
+                             "theatre" : "EROS", 
+                             
+                             "Type" : [
+                            	 { 
+                            	 "type":""
+                            	 },
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"180"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"100"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"260"}
+                                 ]
+                                 } 
+                                 
+                             ]
+                         },
+                     { 
+                        "theatre" : "INOX", 
+                             
+                             "Type" : [
+                            	  { 
+                            	   "type":""
+                            	  },
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"200"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"120"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"340"}
+                                 ]
+                                 } 
+                             ]
+                     }
+                 ]
+             },
+             {
+                 "city" : "Pune",
+                 "Theatres" : [
+                 	
+                 	
+                 	    {
+                     		"theatre":""
+                     	},
+                     	
+                     { 
+                         "theatre" : "CityPride" ,
+                         
+                          "Type" : [
+                            	 
+                            	  { "type":""},
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"220"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"150"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"350"}
+                                 ]
+                                 } 
+                                 
+                             ]
+                         
+                        
+                     },
+                     { 
+                         "theatre" : "E-Square",
+                         
+                          "Type" : [
+                            	 
+                            	 { 
+                            	 "type":""
+                            	 },
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"170"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"100"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"200"}
+                                 ]
+                                 } 
+                             ]
+                     }
+                 ]
+             },
+             
+             {
+                 "city" : "Aurangabad",
+                  "Theatres" : [
+                  
+                        {
+                     		"theatre":""
+                     	},
+                 	
+                     { 
+                        "theatre" : "PVR" ,
+                         "Type" : [
+                            	 
+                            	  { 
+                            	  "type":""
+                            	  },
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"250"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"140"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"300"}
+                                 ]
+                                 } 
+                                 
+                             ]
+                        
+                     },
+                     { 
+                         "theatre" : "Carnival",
+                         
+                          "Type" : [
+                            	 
+                            	 {
+                            	  "type":""
+                            	  },
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"190"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"120"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"280"}
+                                 ]
+                                 } 
+                                 
+                             ]
+                     }
+                     
+                     
+                 ]
+             },
+             
+             {
+                 "city" : "Nagpur",
+                  "Theatres" : [
+                 	
+                 	
+                 	
+                 	 {
+                     		"theatre":""
+                     },
+                 	
+                     { 
+                         "theatre" : "Vishal" ,
+                          "Type" : [
+                            	 
+                            	   { 
+                            	   "type":""
+                            	   },
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"160"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"200"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"200"}
+                                 ]
+                                 } 
+                                 
+                             ]
+                        
+                     },
+                     { 
+                          "theatre" : "IMAX",
+                           "Type" : [
+                            	 
+                            	 { "type":""},
+                            	
+                                 { "type": "GOLD", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"200"}
+                                 ]
+                                 
+                                 },  
+                                 { "type": "SILVER", 
+                                 
+                                 "price":[
+                                 
+                                 {"name":"130"}
+                                 ]
+                                 },
+                                 
+                                 { "type": "PLATINUM",
+                                 
+                                  "price":[
+                                 
+                                 {"name":"260"}
+                                 ]
+                                 } 
+                             ]
+                     }
+                     
+                   ]
+              }
+                     
+            ]
+         }
+         
+         
+         
+ 

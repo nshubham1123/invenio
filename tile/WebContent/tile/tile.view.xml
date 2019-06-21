@@ -1,0 +1,929 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="tile.tile" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified">
+	<Page id="p1">
+
+ 
+		<l:HorizontalLayout class="sapUiSmallMarginEnd">
+
+			<core:Icon src="sap-icon://home" class="size5" color="white">
+				<core:layoutData>
+					<FlexItemData growFactor="1" />
+				</core:layoutData>
+			</core:Icon>
+
+
+			<Link text="Home" class="b" width="105px"></Link>
+
+			<Link text="Login" class="b" width="105px" press="onShowView1" />
+
+			<!-- <Link text="About Us" class="b" width="120px" press="onShowView6" 
+				/> -->
+
+			<Link text="Movies" class="b" width="115px" press="onShowView" />
+
+			<!-- <Link text="Trailers" class="b" width="105px" press="onShowView4"/> -->
+
+			<Link text="Tickets" class="b" width="180px" press="onShowView5" />
+
+
+
+		</l:HorizontalLayout>
+		<Panel width="auto" class="bg">
+			<headerToolbar>
+				<Toolbar height="32rem">
+				</Toolbar>
+			</headerToolbar>
+
+		</Panel>
+
+
+	</Page>
+
+	<Page id="p2" title="Login" showNavButton="true" navButtonType="Back"
+		navButtonPress="onBack" class="sapUiUfdShellBackground ">
+		
+
+ <VBox fitContainer="true" justifyContent="Center" alignItems="Center" >
+ 
+
+									<Text id="un" text="User Name" class="Mandatory b" visible="false">
+										<layoutData>
+											<l:GridData span="L1 M2 S6" indent="L5 M0 S0"
+												linebreakL="true" linebreakM="true" linebreakS="true">
+											</l:GridData>
+										</layoutData>
+									</Text>
+									<Input id="Uname" value="{/UserName}" liveChange="LogFun" placeholder="Enter Username" >
+										<layoutData>
+											<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+												linebreakL="true" linebreakM="true" linebreakS="true">
+											</l:GridData>
+										</layoutData>
+									</Input>
+									<Text id="pswd" text="Password" class="Mandatory b" visible="false">
+										<layoutData>
+											<l:GridData span="L1 M2 S6" indent="L5 M0 S0"
+												linebreakL="true" linebreakM="true" linebreakS="true">
+											</l:GridData>
+										</layoutData>
+									</Text>
+									<Input id="pd" value="{/pwd}" type="Password" liveChange="PasswordFun" placeholder="Enter Password">
+										<layoutData>
+											<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+												linebreakL="true" linebreakM="true" linebreakS="true">
+											</l:GridData>
+										</layoutData>
+									</Input>
+
+									<Button id="btn2" width="200px" type="Emphasized" text="Log in" class="b" press="onShowView3">
+										<layoutData>
+											<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+												linebreakL="true" linebreakM="true" linebreakS="true">
+											</l:GridData>
+										</layoutData>
+									</Button>
+									<Button id="sup" type="Emphasized" width="200px" text="Sign Up" class="b" press="onShowView2" >
+										<layoutData>
+											<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+												linebreakL="true" linebreakM="true" linebreakS="true">
+											</l:GridData>
+										</layoutData>
+									</Button>
+								
+							
+
+	</VBox>
+		<footer>
+            <OverflowToolbar id="otbFooter">
+                <ToolbarSpacer/>
+                
+              
+            </OverflowToolbar>
+		</footer>
+ 
+
+	</Page>
+	<Page id="p3" title="Registration" showNavButton="true"
+		navButtonType="Back" navButtonPress="onBack">
+
+<content>
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="S1" minWidth="1024" maxContainerCols="2" editable="true"
+			layout="ResponsiveGridLayout"  title=""  backgroundDesign="Transparent">
+			
+			<f:content>
+								
+								<Text id="Eid" text="Email Id" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Input id="EId" type="Email" liveChange="EmailFun"
+									placeholder=" Enter Email-Id">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+
+								<Text id="TelNo" text="Phone Number" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Input id="phno" maxLength="10" placeholder="Enter Phone Number"
+									liveChange="Phonefun">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+
+								<Text id="Pswd" text="Password" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Input id="ipwd" type="Password" placeholder="Enter password"
+									liveChange="PwdFun">
+
+
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+
+								<Text id="cpwd" text="Confirm Password" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Input id="icpwd" type="Password" placeholder="Re-Enter password"
+									liveChange="CpwdFun">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+								<Button type="Emphasized" id="btn1" text="Register" press="fnvalidate">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Button>
+
+</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+		</content>
+	</Page>
+
+	<Page id="p4" title="movies" showNavButton="true" navButtonType="Back"
+		navButtonPress="onBack">
+		<l:HorizontalLayout width="100%">
+
+			<Link text="NOW SHOWING" class="b" width="380px" />
+
+
+			<Link text="COMING SOON" class="b" width="180px" press="onShowView4" />
+
+			<!-- <Link text="EXCLUSIVE" class="b" width="180px" press="onShowView3" 
+				/> -->
+
+		</l:HorizontalLayout>
+
+
+		<f:Form id="form4" class="border">
+			<f:layout>
+				<f:ResponsiveGridLayout columnsL="5"
+					columnsM="5" columnsS="5">
+				</f:ResponsiveGridLayout>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement>
+							<Image src="mv/rd.jpg" width="630px" height="210px">
+								<layoutData>
+									<l:GridData span="L7 M2 S3" indent="L1 M2 S3"
+										linebreakL="false" linebreakM="false" linebreakS="false" />
+
+								</layoutData>
+							</Image>
+
+							<Text text="Raid" class="bl">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L1 M0 S0"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+								</layoutData>
+							</Text>
+
+							<Link text="BOOK" class="a" width="70px" press="onShowView5">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L4 M0 S0"
+										linebreakL="false" linebreakM="false" linebreakS="false">
+									</l:GridData>
+								</layoutData>
+							</Link>
+						</f:FormElement>
+
+						<f:FormElement>
+							<Image src="mv/gb.jpg" width="630px" height="210px">
+								<layoutData>
+									<l:GridData span="L7 M2 S3" indent="L1 M2 S3"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+
+								</layoutData>
+							</Image>
+
+
+
+							<Text text="Gulabjam" class="bl">
+								<layoutData>
+									<l:GridData span="L2 M2 S3" indent="L1 M0 S0"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+								</layoutData>
+							</Text>
+
+							<Link text="BOOK" class="a" width="70px" press="onShowView5">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L3 M0 S0"
+										linebreakL="false" linebreakM="false" linebreakS="false">
+									</l:GridData>
+								</layoutData>
+							</Link>
+						</f:FormElement>
+
+
+						<f:FormElement>
+							<Image src="mv/hi.jpg" width="630px" height="210px">
+								<layoutData>
+									<l:GridData span="L7 M2 S3" indent="L1 M2 S3"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+
+								</layoutData>
+							</Image>
+
+							<Text text="Hichki" class="bl">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L1 M0 S0"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+								</layoutData>
+							</Text>
+
+							<Link text="BOOK" class="a" width="70px" press="onShowView5">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L4 M0 S0"
+										linebreakL="false" linebreakM="false" linebreakS="false">
+									</l:GridData>
+								</layoutData>
+							</Link>
+						</f:FormElement>
+
+						<f:FormElement>
+
+							<Image src="mv/pari.jpg" width="630px" height="210px">
+								<layoutData>
+									<l:GridData span="L7 M2 S3" indent="L1 M2 S3"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+
+								</layoutData>
+							</Image>
+
+							<Text text="Pari" class="bl">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L1 M0 S0"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+								</layoutData>
+							</Text>
+
+							<Link text="BOOK" class="a" width="70px" press="onShowView5">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L4 M0 S0"
+										linebreakL="false" linebreakM="false" linebreakS="false">
+									</l:GridData>
+								</layoutData>
+							</Link>
+						</f:FormElement>
+
+						<f:FormElement>
+
+							<Image src="mv/bl.jpg" width="630px" height="210px">
+								<layoutData>
+									<l:GridData span="L7 M2 S3" indent="L1 M2 S3"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+
+								</layoutData>
+							</Image>
+
+							<Text text="Black Panther" class="bl">
+								<layoutData>
+									<l:GridData span="L3 M2 S3" indent="L1 M0 S0"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+								</layoutData>
+							</Text>
+
+							<Link text="BOOK" class="a" width="70px" press="onShowView5">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L2 M0 S0"
+										linebreakL="false" linebreakM="false" linebreakS="false">
+									</l:GridData>
+								</layoutData>
+							</Link>
+						</f:FormElement>
+
+
+
+
+						<f:FormElement>
+
+							<Image src="mv/wh.jpg" width="630px" height="210px">
+								<layoutData>
+									<l:GridData span="L7 M2 S3" indent="L1 M2 S3"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+
+								</layoutData>
+							</Image>
+
+							<Text text="WhatsApp Lagna" class="bl">
+								<layoutData>
+									<l:GridData span="L4 M2 S3" indent="L1 M0 S0"
+										linebreakL="true" linebreakM="true" linebreakS="true">
+									</l:GridData>
+								</layoutData>
+							</Text>
+
+							<Link text="BOOK" class="a" width="70px" press="onShowView5">
+								<layoutData>
+									<l:GridData span="L1 M2 S3" indent="L1 M0 S0"
+										linebreakL="false" linebreakM="false" linebreakS="false">
+									</l:GridData>
+								</layoutData>
+							</Link>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+
+	</Page>
+
+	<Page id="p5" title="Coming Soon Moovies" showNavButton="true"
+		navButtonType="Back" navButtonPress="onBack">
+		<f:Form id="form5">
+			<f:layout>
+				<f:ResponsiveGridLayout columnsL="5"
+					columnsM="5" columnsS="5">
+				</f:ResponsiveGridLayout>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement>
+							<f:fields>
+
+
+								<Image src="mv/ot.png" width="370px" height="290px">
+									<layoutData>
+										<l:GridData span="L4 M2 S3" indent="L1 M2 S3"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+
+									</layoutData>
+								</Image>
+								<Text text="October" class="bl">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Image src="mv/vr.jpg" width="370px" height="280px">
+									<layoutData>
+										<l:GridData span="L4 M2 S3" indent="L1 M2 S3"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Image>
+
+								<Text text="Veere di Wedding" class="bl">
+									<layoutData>
+										<l:GridData span="L4 M7 S9" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Image src="mv/dh.jpg" width="370px" height="290px">
+									<layoutData>
+										<l:GridData span="L4 M2 S3" indent="L1 M2 S3"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+
+									</layoutData>
+								</Image>
+								<Text text="Dhadak" class="bl">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+
+
+	</Page>
+
+	<Page id="p6" title="Book Tickets" showNavButton="true"
+		navButtonType="Back" navButtonPress="onBack" class="c">
+		<content>
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="S2" minWidth="1024" maxContainerCols="2" editable="true"
+			layout="ResponsiveGridLayout"  title=""  backgroundDesign="Transparent">
+			
+			<f:content>
+
+								<Text id="ldt" text="Date" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<DatePicker id="dp1" displayFormat="yyyy/MM/dd"
+									valueformat="yyyyMMdd" change="fnDate" required="true">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</DatePicker>
+
+								<Text id="lcity" text="City" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M2 S3"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Select id="selCity" items="{/Cities}" change="ThrSelect"
+									required="true">
+									<core:ListItem key="{city}" text="{city}" />
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Select>
+
+
+
+
+
+								<Text id="lthr" text="Select Theatre" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M2 S3"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Select id="selThr" change="TypeSelect" required="true">
+
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Select>
+
+
+								<Text id="ltype" text="Seat Type" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M2 S3"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Select id="selType" change="PrzSelect" required="true">
+
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Select>
+
+
+
+								<Text id="lprize" text="Prize Of Seat" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Select id="selPrize" required="true">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Select>
+
+								<Text id="lno" text="No of Seats" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Select id="selSeat" items="{/Number}" change="fnSeat"
+									required="true">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+									<core:ListItem key="{number}" text="{number}" />
+								</Select>
+
+
+
+								<Text id="sr" text="Select Screen" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Select id="selScreen" items="{/Screen}" required="true">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+									<core:ListItem key="{Screen}" text="{Screen}" />
+								</Select>
+
+
+
+								<Button id="btnpr" type="Emphasized" text="Proceed"  press="onShowView7">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L6 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Button>
+							</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+		</content>
+
+
+	</Page>
+	<Page id="p7" title="Booking Details" showNavButton="true"
+		navButtonType="Back" navButtonPress="onBack">
+
+		<content>
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="S3" minWidth="1024" maxContainerCols="2" editable="true"
+			layout="ResponsiveGridLayout"  title=""  backgroundDesign="Transparent">
+			
+			<f:content>
+
+								<Text id="dt" text="Date" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Text id="date" value="{/dp1}" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L3 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Text id="city" text="City" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M2 S3"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Text id="thr" text="Select Theatre" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M2 S3"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Text id="type" text="Select Seat Type" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M2 S3"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Text id="price" text="Price Of Seat" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Text id="no" text="No of Seats" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Text text="Total:" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+							</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+		</content>
+	</Page>
+	<Page id="p8" showNavButton="true" navButtonType="Back"
+		navButtonPress="onBack">
+
+		<content>
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="S4" minWidth="1024" maxContainerCols="2" editable="true"
+			layout="ResponsiveGridLayout"  title=""  backgroundDesign="Transparent">
+			
+			<f:content>
+
+								<VBox alignItems="Center" justifyContent="Center">
+									<SegmentedButton select="setPaymentMethod"
+										id="paymentMethodSelection" selectedKey="{/selectedPayment}">
+										<items>
+											<SegmentedButtonItem key="Credit Card"
+												icon="sap-icon://credit-card" text="Credit card" width="150px"
+												press="onShowView8">
+
+											</SegmentedButtonItem>
+
+											<SegmentedButtonItem key="Debit Card"
+												icon="sap-icon://credit-card" text="Debit card" width="150px"
+												press="onShowView8">
+
+											</SegmentedButtonItem>
+
+											<SegmentedButtonItem key="Bank Transfer"
+												icon="sap-icon://money-bills" text="Net Banking" width="170px"
+												press="onShowView9">
+
+											</SegmentedButtonItem>
+
+										</items>
+									</SegmentedButton>
+								</VBox>
+
+						</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+		</content>
+
+	</Page>
+	<Page id="CreditCardStep" title="Credit card Information"
+		showNavButton="true" navButtonType="Back" navButtonPress="navBack">
+		<content>
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="S5" minWidth="1024" maxContainerCols="2" editable="true"
+			layout="ResponsiveGridLayout"  title=""  backgroundDesign="Transparent">
+			
+			<f:content>
+								<Text text="Card Type" required="true" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+
+								</Text>
+
+								<RadioButton id="rb1" text="Visa" groupName="rbcr" class="bt"
+									select="fnCreditCard">
+									<layoutData>
+										<l:GridData span="L1 M2 S3" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</RadioButton>
+
+
+								<RadioButton id="rb2" text="Master Card" groupName="rbcr" class="bt"
+									select="fnCreditCard">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</RadioButton>
+
+								<Text text="Card Holder Name" required="true" class="Mandatory bt" >
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<Input id="cname" maxLength="20" valueLiveUpdate="true" liveChange="CName" >
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</Input>
+								<Text text="Card number" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<MaskInput id="cno" mask="0000  0000  0000  0000" >
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+									<rules>
+										<MaskInputRule maskFormatSymbol="0" regex="[0-9]" />
+									</rules>
+								</MaskInput>
+								<Text text="Security code" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<MaskInput id="scode" mask="000">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+									<rules>
+										<MaskInputRule maskFormatSymbol="0" regex="[0-9]" />
+									</rules>
+								</MaskInput>
+								<Text text="Expiration date" class="Mandatory bt">
+									<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+								<DatePicker id="dp2" change="exDate">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+								</DatePicker>
+
+								<Button id="con" type="Emphasized" text="Continue" press="OnBtnPress">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Button>
+						
+						</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+		</content>
+
+	</Page>
+	<Page id="NetB" showNavButton="true" navButtonType="Back" title="NetBanking Details" 
+		navButtonPress="navBack">
+		<content>
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="S6" minWidth="1024" maxContainerCols="2" editable="true"
+			layout="ResponsiveGridLayout"  title=""  backgroundDesign="Transparent">
+			
+			<f:content>
+								<Text id="nb" text="Net Banking" class="Mandatory bt">
+										<layoutData>
+										<l:GridData span="L1 M2 S6" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+								<Select id="selBank" items="{/bank}">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L0 M0 S0"
+											linebreakL="false" linebreakM="false" linebreakS="false">
+										</l:GridData>
+									</layoutData>
+									<core:ListItem key="{bank}" text="{bank}" />
+								</Select>
+
+
+								<Button id="btn" type="Emphasized" text="Continue" press="OnBtnPress">
+									<layoutData>
+										<l:GridData span="L2 M4 S6" indent="L5 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Button>
+
+								</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+		</content>
+	</Page>
+
+	<Page id="p9">
+		<f:Form id="form11" title="Select Seat" class="border">
+			<f:layout>
+				<f:ResponsiveGridLayout columnsL="5"
+					columnsM="5" columnsS="5">
+				</f:ResponsiveGridLayout>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement>
+							<f:fields>
+
+								<Text id="fn">
+									<layoutData>
+										<l:GridData span="L2 M2 S3" indent="L4 M0 S0"
+											linebreakL="true" linebreakM="true" linebreakS="true">
+										</l:GridData>
+									</layoutData>
+								</Text>
+
+
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+
+	</Page>
+
+
+</mvc:View>
