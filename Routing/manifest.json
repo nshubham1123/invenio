@@ -1,0 +1,72 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+  "_version": "1.1.0",
+  "id": "routing",
+  "type": "application",
+  "applicationVersion": {
+   "version": "1.0.0"
+  },
+  "ach": "CA-UI5-DOC"
+  },
+  "sap.ui": {
+  "_version": "1.1.0",
+  "technology": "UI5",
+  "deviceTypes": {
+   "desktop": true,
+   "tablet": true,
+   "phone": true
+  },
+  "supportedThemes": [
+   "sap_bluecrystal"
+  ]
+  },
+  "sap.ui5": {
+  "_version": "1.1.0",
+  "rootView": "routing.view.Master",
+  "dependencies": {
+   "minUI5Version": "1.30",
+   "libs": {
+  "sap.m": {}
+   }
+  },
+  "models": {
+   "i18n": {
+  "type": "sap.ui.model.resource.ResourceModel",
+  "settings": {
+   "bundleName": "routing.i18n.i18n"
+  }
+   }
+  },
+  "routing": {
+   "config": {
+  "routerClass": "sap.m.routing.Router",
+  "viewType": "XML",
+  "viewPath": "routing.view",
+  "controlId": "app",
+  "transition": "slide",
+  "controlAggregation": "pages"
+   },
+   "routes": [
+  {
+   "pattern": "",
+   "name": "master",
+   "target": "master"
+  },
+  {
+   "pattern": "second",
+   "name": "second",
+   "target": "second"
+  }
+   ],
+   "targets": {
+  "master": {
+   "viewName": "Master"
+  },
+  "second": {
+   "viewName": "Slave"
+  }
+    }
+  }
+  }
+}
